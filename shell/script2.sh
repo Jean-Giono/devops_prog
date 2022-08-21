@@ -3,7 +3,6 @@
 #--------------------
 #Author: Jean-Giono
 #Date: 04/08/2022
-#FileName:script2.sh
 #--------------------
 
 
