@@ -1,0 +1,10 @@
+04/08/2022 example.com/toto 404
+04/08/2022 example.com 200
+04/08/2022 example.com 200
+04/08/2022 example.com/toto 404
+08/08/2022  000
+08/08/2022 example.com 200
+08/08/2022 example.com/toto 404
+21/08/2022  000
+21/08/2022 example.com 200
+21/08/2022 example.co 403
