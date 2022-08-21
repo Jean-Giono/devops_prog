@@ -13,7 +13,7 @@ def renameFile(url, dest_name):
         url : l'adresse de votre fichier zippé
         dest_name : le nom du dossier dans lequel seront dézippés vos fichiers
         
-        ex : url = "https://opusidea-training.s3.eu-west-3.amazonaws.com/divers/flags.zip"
+        ex : url = "https://github.com/Jean-Giono/devops_prog/blob/main/python/project1/flags.zip"
              dest_name = "flagBis"
     '''
 
@@ -64,7 +64,7 @@ def renameFile(url, dest_name):
     print("\n[+] Tous vous fichiers ont bien été extraits dans le dossier %s!\n" % dest_name)
 
 
-url = "https://opusidea-training.s3.eu-west-3.amazonaws.com/divers/flags.zip"
+url = "https://github.com/Jean-Giono/devops_prog/blob/main/python/project1/flags.zip"
 dest_name = "flagBis"
 
 renameFile(url, dest_name)
