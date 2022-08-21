@@ -7,7 +7,7 @@
 
 NBARG=1
 MISSINGARGS=20
-URLFILE=https://github.com/cdufour/devops-devoteam/raw/master/tp3-files.zip
+URLFILE=https://github.com/Jean-Giono/devops_prog/blob/main/tp3-files.zip
 
 n_user=$1
 this_user=$(whoami)
