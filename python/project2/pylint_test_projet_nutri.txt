@@ -1,0 +1,6 @@
+************* Module test_projet_nutri
+test_projet_nutri.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+
+------------------------------------------------------------------
+Your code has been rated at 9.57/10 (previous run: 9.57/10, +0.00)
+

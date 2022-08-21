@@ -1,0 +1,7 @@
+************* Module projet_nutri
+projet_nutri.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+projet_nutri.py:5:0: C0411: standard import "import argparse" should be placed before "from food import Food" (wrong-import-order)
+
+------------------------------------------------------------------
+Your code has been rated at 7.78/10 (previous run: 7.78/10, +0.00)
+

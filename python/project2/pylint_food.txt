@@ -1,0 +1,9 @@
+************* Module food
+food.py:86:0: C0301: Line too long (129/100) (line-too-long)
+food.py:94:0: C0301: Line too long (120/100) (line-too-long)
+food.py:1:0: C0114: Missing module docstring (missing-module-docstring)
+food.py:86:14: C0209: Formatting a regular string which could be a f-string (consider-using-f-string)
+
+------------------------------------------------------------------
+Your code has been rated at 9.32/10 (previous run: 9.32/10, +0.00)
+
