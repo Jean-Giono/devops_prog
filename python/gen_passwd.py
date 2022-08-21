@@ -1,6 +1,5 @@
 #Jean-Giono
 #12/08/2022
-#tp5 - exo1 - Variante b
 
 import argparse
 import requests as req
