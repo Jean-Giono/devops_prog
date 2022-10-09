@@ -1,0 +1,12 @@
+[Unit]
+Description=File restoration!
+Requires=filetransfer.service
+Before=filetransfer.service
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash /home/jeangiono/3_decompress_archive
+ExecStop=/bin/bash -c "echo file restoration ended!"
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,7 @@
+[Unit]
+Description=Data transfer!
+
+[Service]
+Type=simple
+ExecStart=/home/jeangiono/4_transfer_data_via_scp
+ExecStop=/usr/bin/echo data transfer ended!

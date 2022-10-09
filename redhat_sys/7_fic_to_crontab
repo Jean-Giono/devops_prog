@@ -1,0 +1,7 @@
+#!/bin/bash
+
+MSG=coucou
+
+the_date=$(date "+%Y-%m-%d %H:%M:%S")
+
+echo "${MSG}, il est: ${the_date}" >> /scripts/log_coucou.txt
