@@ -3,3 +3,5 @@
 
 # make sure you take the last dot in the above command, otherwise you will not get
 # the expected result
+
+# you should get the following result : hello from 92d79b6de29f
