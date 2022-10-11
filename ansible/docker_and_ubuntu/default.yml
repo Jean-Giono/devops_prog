@@ -1,0 +1,8 @@
+---
+# Fichier contenant des variables réutilisables dans les playbooks
+# ~/vars/default.yaml
+
+container_count: 1
+container_name: ubuntu-deploy
+container_image: ubuntu
+container_command: bash

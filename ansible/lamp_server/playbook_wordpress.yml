@@ -1,0 +1,123 @@
+---
+# Fichier playbook pour deploiement de Wordpress sur le serveur Dev Ubuntu
+- name: Deploiement de Wordpress sur svrdev-ubuntu (categorie wordpress)
+  hosts: wordpress
+  remote_user: root
+  vars_files:
+    - ~/vars/default.yaml
+
+  tasks:
+    - name: Installation des paquets pour LAMP
+      apt: name={{ item }} update_cache=yes state=latest
+      loop: [ 'apache2', 'mysql-server', 'python3-pymysql', 'php',
+              'php-mysql', 'libapache2-mod-php', 'ufw', 'unzip' ]
+
+    - name: Installation des PHP Extensions
+      apt: name={{ item }} update_cache=yes state=latest
+      loop: "{{ php_modules }}"
+
+  # Apache Configuration
+    - name: Creation de document root pour le site web
+      file:
+        path: "/var/www/{{ http_host }}"
+        state: directory
+        owner: "www-data"
+        group: "www-data"
+        mode: '0755'
+
+    - name: Créer un VirtualHost Apache
+      template:
+        src: "~/templates/apache.conf.j2"
+        dest: "/etc/apache2/sites-available/{{ http_conf }}"
+      notify: Reload Apache
+
+    - name: Activer rewrite module
+      shell: /usr/sbin/a2enmod rewrite
+      notify: Reload Apache
+
+    - name: Activer nouveau siteweb
+      shell: /usr/sbin/a2ensite {{ http_conf }}
+      notify: Reload Apache
+
+    - name: Désactiver site web default d'Apache
+      shell: /usr/sbin/a2dissite 000-default.conf
+      notify: Restart Apache
+
+  # MySQL Configuration
+    - name: Definir mot de passe root
+      mysql_user:
+        name: root
+        password: "{{ mysql_root_password }}"
+        login_unix_socket: /var/run/mysqld/mysqld.sock
+
+    - name: Retirer les user anonymes
+      mysql_user:
+        name: ''
+        host_all: yes
+        state: absent
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
+
+    - name: Retirer la base de données MySQL test
+      mysql_db:
+        name: test
+        state: absent
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
+
+    - name: Creation base de données pour WordPress
+      mysql_db:
+        name: "{{ mysql_db }}"
+        state: present
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
+
+    - name: Creation user MySQL pour WordPress
+      mysql_user:
+        name: "{{ mysql_user }}"
+        password: "{{ mysql_password }}"
+        priv: "{{ mysql_db }}.*:ALL"
+        state: present
+        login_user: root
+        login_password: "{{ mysql_root_password }}"
+
+  # UFW Configuration
+    - name: "UFW - Ajout HTTP port {{ http_port }} dans firewall"
+      ufw:
+        rule: allow
+        port: "{{ http_port }}"
+        proto: tcp
+
+  # WordPress Configuration
+    - name: Telecharger la derniere version de WordPress
+      unarchive:
+        src: https://wordpress.org/latest.tar.gz
+        dest: "/var/www/{{ http_host }}"
+        remote_src: yes
+        creates: "/var/www/{{ http_host }}/wordpress"
+
+    - name: Donner le droit de propriété à www-data pour le document root
+      file:
+        path: "/var/www/{{ http_host }}"
+        state: directory
+        recurse: yes
+        owner: www-data
+        group: www-data
+
+    - name: Changer les permissions pour les dossiers de Wordpress
+      shell: "/usr/bin/find /var/www/{{ http_host }}/wordpress/ -type d -exec chmod 750 {} \\;"
+
+    - name: Changer les permissions pour fichiers de Wordpress
+      shell: "/usr/bin/find /var/www/{{ http_host }}/wordpress/ -type f -exec chmod 640 {} \\;"
+
+  # Gérer la relance d'Apache2 après chaque modif
+  handlers:
+    - name: Reload Apache
+      service:
+        name: apache2
+        state: reloaded
+
+    - name: Restart Apache
+      service:
+        name: apache2
+        state: restarted

@@ -1,0 +1,9 @@
+- name: My Folders
+  hosts: all
+  tasks:
+  - name: creation d'un dossier
+    file: path={{item}} state=directory
+    with_items:
+    - '/root/playbooks/rep1'
+    - '/root/playbooks/rep2'
+

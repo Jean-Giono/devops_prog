@@ -1,0 +1,14 @@
+- name: package installation
+  hosts: all
+  tasks:
+  - name: installation d'items
+    package:
+     name: "{{item}}
+     state: present
+    with_items:
+     - apache2
+     - mariadb-server
+     - php
+     - git
+     - curl
+     - bind9

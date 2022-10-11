@@ -1,0 +1,23 @@
+---
+# Fichier contenant des variables réutilisables dans les playbooks
+# ~/vars/default.yaml
+
+container_count: 1
+container_name: ubuntu-deploy
+container_image: ubuntu
+container_command: bash
+
+#System Settings
+php_modules: [ 'php-curl', 'php-gd', 'php-mbstring', 'php-xml', 'php-xmlrpc', 'php-soap', 'php-intl', 'php-zip' ]
+
+#MySQL Settings
+mysql_root_password: "devoteam"
+mysql_db: "wordpress"
+mysql_user: "devops"
+mysql_password: "devops"
+
+#HTTP Settings
+http_host: "svrdev-ubuntu"
+http_conf: "apache2-wp.conf"
+http_port: "80"
+
