@@ -1,0 +1,11 @@
+node {
+    stage ("git"){
+        git branch: 'main', credentialsId: 'mykeyssh', url: 'git@gitlab.com:####.git'
+    }
+    stage ("build"){
+        sh 'docker build --tag thisispendu .'
+    }
+    stage("run"){
+        sh 'docker run --rm thisispendu'
+    }
+}
